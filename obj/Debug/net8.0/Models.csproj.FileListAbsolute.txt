@@ -12,3 +12,4 @@ D:\c#\Models\obj\Debug\net8.0\refint\Models.dll
 D:\c#\Models\obj\Debug\net8.0\Models.pdb
 D:\c#\Models\obj\Debug\net8.0\Models.genruntimeconfig.cache
 D:\c#\Models\obj\Debug\net8.0\ref\Models.dll
+D:\c#\Models\obj\Debug\net8.0\Models.sourcelink.json
