@@ -1,3 +1,5 @@
+// to use namespace start with app name with folder name see the example below
+
 namespace MyApp.Models 
 {
   public class Computer 
