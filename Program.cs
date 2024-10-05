@@ -12,40 +12,44 @@ namespace MyApp
 
             Computer lenovo = new Computer()
             { 
-                Motherboard="Lenovo",
-                Price=99.99m,
+                Motherboard="E590",
+                Price=2599.99m,
                 ReleaseDate=DateTime.Now,
                 HasLTE=true,
                 HasWifi=true,
-                VideoCard = "asdfd"
+                VideoCard = "Nvidia"
+                
 
             };
             DataContextDapper dapper = new DataContextDapper();
+            DataContextEF entityFramework = new DataContextEF();
+            entityFramework.Add(lenovo);
+            entityFramework.SaveChanges();            
             string sqlCommand = "SELECT GETDATE()";
             DateTime rightNow=  dapper.LoadDataSingle<DateTime>(sqlCommand);
             Console.WriteLine(rightNow);
 
 
-            string sql = @"INSERT INTO TutorialAppSchema.Computer (
-                     Motherboard,
-                     Price,
-                     ReleaseDate,
-                     HasLTE,
-                     HasWifi,
-                     VideoCard,   
-                     CPUCores          
-            )   
-                    VALUES ('"+lenovo.Motherboard
-                            +"','"+lenovo.Price
-                            +"','"+lenovo.ReleaseDate
-                            +"','"+lenovo.HasLTE
-                            +"','"+lenovo.HasWifi
-                            +"','"+lenovo.VideoCard
-                            +"','2')";
+            // string sql = @"INSERT INTO TutorialAppSchema.Computer (
+            //          Motherboard,
+            //          Price,
+            //          ReleaseDate,
+            //          HasLTE,
+            //          HasWifi,
+            //          VideoCard,   
+            //          CPUCores          
+            // )   
+            //         VALUES ('"+lenovo.Motherboard
+            //                 +"','"+lenovo.Price
+            //                 +"','"+lenovo.ReleaseDate
+            //                 +"','"+lenovo.HasLTE
+            //                 +"','"+lenovo.HasWifi
+            //                 +"','"+lenovo.VideoCard
+            //                 +"','2')";
 
 
-            bool result=dapper.ExecuteQuery(sql);                
-            Console.WriteLine(@"Number of rows "+result+"");
+            // bool result=dapper.ExecuteQuery(sql);                
+            // Console.WriteLine(@"Number of rows "+result+"");
 
             string sqlSelect = @"Select * FROM TutorialAppSchema.Computer";
             // dapper reutnr IEnumrables 

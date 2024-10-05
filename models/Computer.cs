@@ -16,7 +16,7 @@ namespace MyApp.Models
             // this will create a field name _motherboard for us and sets the value.
             // this is a attributes it has uppercase and does not have colon ";".
             public string Motherboard { get; set; } = "";
-
+            public int ComputerId { get; set; }
             public int CPUCores { get; set; } 
             public bool HasWifi { get; set; } 
             public bool HasLTE { get; set; } 
