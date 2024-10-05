@@ -1,8 +1,4 @@
-﻿using System;
-using System.Data;
-using System.Dynamic;
-using Dapper;
-using Microsoft.Data.SqlClient;
+﻿using MyApp.data;
 using MyApp.Models;
 
 namespace MyApp
@@ -11,8 +7,9 @@ namespace MyApp
     {
 
              
-        public  static void Main(string[] args)
+      static void Main(string[] args)
         {
+
             Computer lenovo = new Computer()
             { 
                 Motherboard="Lenovo",
@@ -23,14 +20,10 @@ namespace MyApp
                 VideoCard = "asdfd"
 
             };
-            // System.Console.WriteLine(lenovo.VideoCard);
-            string connectionString = "Server=localhost;Database=DotNetCourseDatabase;TrustServerCertificate=true;Trusted_Connection=true";
-            // Mac and linux Connection String
-            // string connectionString = "Server=localhost;Database=DotNetCourseDatabase;TrustServerCertificate=true;Trusted_Connection=false;User Id=sumit;Password=SQLConnect1";
-            IDbConnection dbConnection =new SqlConnection(connectionString);
+            DataContextDapper dapper = new DataContextDapper();
             string sqlCommand = "SELECT GETDATE()";
-            DateTime rightNow=  dbConnection.QuerySingle<DateTime>(sqlCommand);
-            System.Console.WriteLine(rightNow);
+            DateTime rightNow=  dapper.LoadDataSingle<DateTime>(sqlCommand);
+            Console.WriteLine(rightNow);
 
 
             string sql = @"INSERT INTO TutorialAppSchema.Computer (
@@ -51,19 +44,17 @@ namespace MyApp
                             +"','2')";
 
 
-            // int result=dbConnection.Execute(sql);                
-            // System.Console.WriteLine(@"Number of rows '"+result+"'");
+            bool result=dapper.ExecuteQuery(sql);                
+            Console.WriteLine(@"Number of rows "+result+"");
 
             string sqlSelect = @"Select * FROM TutorialAppSchema.Computer";
             // dapper reutnr IEnumrables 
-           IEnumerable<Computer> computers= dbConnection.Query<Computer>(sqlSelect);
+           IEnumerable<Computer> computers= dapper.LoadData<Computer>(sqlSelect);
             System.Console.WriteLine("CPUCORS, MotherBoard HASLTE,  HAS WIFI, VIDEOCARD"); 
            foreach (Computer item in computers)
-
-           {
-        Console.WriteLine(item.CPUCores+item.Motherboard+item.HasLTE+item.HasWifi+item.VideoCard);
-         
-           }
-        }
+            {
+             Console.WriteLine(item.CPUCores+item.Motherboard+item.HasLTE+item.HasWifi+item.VideoCard);
+            }
+         }
     }
 }
